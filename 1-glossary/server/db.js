@@ -6,12 +6,12 @@ require("dotenv").config();
 // 3. Export the models
 // 4. Import the models into any modules that need them
 
-mongoose.connect(`mongodb://localhost:${process.env.PORT}/${process.env.DB_NAME}`)
+mongoose.connect(`mongodb://localhost:27017/${process.env.DB_NAME}`)
   .catch(err => console.log(err));
 
 const definitionSchema = new mongoose.Schema({
   word: String,
-  defintioin: String
+  definition: String
 });
 
 const Definition = mongoose.model('Definition', definitionSchema);
@@ -19,17 +19,20 @@ const Definition = mongoose.model('Definition', definitionSchema);
 module.exports = {
   findWord: function (word) {
     return Definition.find({ word: word });
+  },
+
+  findAll: function () {
+    return Definition.find({});
+  },
+
+  addWord: function (word, definition) {
+    return Definition.findOneAndUpdate({ word: word }, { definition: definition }, {
+      new: true,
+      upsert: true
+    })
+  },
+
+  deleteWord: function (word) {
+    return Definition.findOneAndDelete({ word: word });
   }
 }
-
-
-
-// Definition.findOneAndUpdate({ word: 'love' }, { definition: 'a feeling' }, (err, response) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log('added to database');
-//   }
-// })
-  // .then(response => console.log('added to database'))
-  // .catch(err => console.log('err'));

@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { findWord } = require("./db");
+const { findWord, findAll, addWord, deleteWord } = require("./db");
 
 const app = express();
 
@@ -18,6 +18,16 @@ app.use(bodyParser.json())
  *
  */
 
+app.get('/api', (req, res) => {
+  findAll()
+    .then(words => {
+      res.status(200).send(words);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    })
+});
+
 app.get('/search', (req, res) => {
   // console.log('request', req.query);
   findWord(req.query.term)
@@ -26,11 +36,33 @@ app.get('/search', (req, res) => {
       res.status(200).send(doc);
     })
     .catch(err => {
-      console.log(err);
+      res.status(500).send(err);
     })
 });
 
+app.post('/changeList', (req, res) => {
+  // console.log(req.body);
+  addWord(req.body.word, req.body.definition)
+    .then(response => {
+      return findAll();
+    })
+    .then(words => {
+      res.status(201).send(words);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    })
+});
 
+app.post('/delete', (req, res) => {
+  deleteWord(req.body.deleteWord)
+    .then(response => {
+      res.status(201).send(response);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    })
+});
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
