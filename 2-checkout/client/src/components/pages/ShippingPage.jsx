@@ -43,11 +43,11 @@ class ShippingPage extends React.Component {
         this.props.onClickNext('ShippingPage');
       }}>
         <h1>Shipping Address</h1>
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Line 1' name='line1' />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Line 1' name='line1' required="required" />
         <input onChange={(e) => this.handleInputChange(e)} placeholder='Line 2' name='line2' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='State' name='state' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Zip Code' name='zip' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Phone Number' name='phone' />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='State' name='state' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Zip Code' name='zip' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Phone Number' name='phone' required="required" />
         <button>Next</button>
       </form>
     );

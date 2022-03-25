@@ -83,8 +83,8 @@ app.get('/getSummary', (req, res) => {
         console.log(err, 'get not working here');
         res.status(500).send(err);
       } else {
-        console.log(results);
-        res.sendStatus(200);
+        // console.log(results);
+        res.status(200).send(results);
       }
     }
   );

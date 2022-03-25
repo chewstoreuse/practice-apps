@@ -39,10 +39,10 @@ class BillingPage extends React.Component {
         this.props.onClickNext('BillingPage');
       }}>
         <h1>Billing Information</h1>
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='CC #' name='credit' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Expiration Date' name='expire' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='CVV' name='cvv' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Billing Zip Code' name='billingZip' />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='CC #' name='credit' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Expiration Date' name='expire' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='CVV' name='cvv' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Billing Zip Code' name='billingZip' required="required" />
         <button>Next</button>
       </form >
     )

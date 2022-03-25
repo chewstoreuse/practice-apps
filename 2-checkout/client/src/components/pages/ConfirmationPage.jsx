@@ -6,22 +6,46 @@ class ConfirmationPage extends React.Component {
     super(props)
 
     this.state = {
-      accountSummary: [],
-      shippingSummary: [],
-      billingSummary: []
+      accountSummary: {},
+      shippingSummary: {}
     }
   }
 
   componentDidMount() {
     axios.get('/getSummary')
-    // .then()
+      .then(results => {
+        var summary = results.data[0];
+        this.setState({
+          accountSummary: {
+            user: summary.userName,
+            email: summary.email,
+            phone: summary.phoneNumber
+          },
+          shippingSummary: {
+            line1: summary.line1,
+            state: summary.userState,
+            zip: summary.zip
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
     return (
-      <form onSubmit={() => { this.props.onClickNext('ConfirmationPage') }}>
+      <form className='confirmation-page' onSubmit={() => { this.props.onClickNext('ConfirmationPage') }}>
         <h1>Order Summary</h1>
-        <p>insert order info here...</p>
+        <h1>Hi, {this.state.accountSummary.user}</h1>
+        <h4>Thank you for shopping with us, please confirm the information below before proceeding to purchase</h4>
+        <p><strong>Contact:</strong></p>
+        <p>{this.state.accountSummary.email}</p>
+        <p>{this.state.accountSummary.phone}</p>
+        <hr />
+        <p><strong>Shipping information:</strong></p>
+        <p>{this.state.shippingSummary.line1}</p>
+        <p>{this.state.shippingSummary.state}, {this.state.shippingSummary.zip}</p>
         <button>Purchase</button>
       </form>
     );

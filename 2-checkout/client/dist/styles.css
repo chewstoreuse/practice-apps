@@ -81,3 +81,15 @@ form input {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.confirmation-page button {
+  margin-top: 20px;
+}
+
+.confirmation-page h4 {
+  margin-bottom: 20px;
+}
+
+.confirmation-page hr {
+  margin: 15px 0 15px 0;
+}

@@ -37,12 +37,13 @@ class CreateAccount extends React.Component {
     return (
       <form onSubmit={() => {
         this.onFormSubmit();
+
         this.props.onClickNext('CreateAccount');
       }} className='create-account-form'>
         <h1>Create an account</h1>
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Name' name='customer' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Email' name='email' />
-        <input onChange={(e) => this.handleInputChange(e)} placeholder='Password' name='password' />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Name' name='customer' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Email' name='email' required="required" />
+        <input onChange={(e) => this.handleInputChange(e)} placeholder='Password' name='password' required="required" />
         <button>Next</button>
       </form>
     );
