@@ -18,7 +18,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='search'>
         <input onChange={(event) => this.onChange(event)} placeholder="Search..." />
         <button onClick={() => this.props.handleSearch(this.state.word)}>Search</button>
       </div>

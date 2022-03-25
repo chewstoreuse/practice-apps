@@ -73,3 +73,7 @@ main {
 .definition-options {
   float: right;
 }
+
+.definition button {
+  margin-left: 10px;
+}

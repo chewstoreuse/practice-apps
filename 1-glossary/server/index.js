@@ -18,6 +18,7 @@ app.use(bodyParser.json())
  *
  */
 
+//retrieve all words
 app.get('/api', (req, res) => {
   findAll()
     .then(words => {
@@ -28,6 +29,7 @@ app.get('/api', (req, res) => {
     })
 });
 
+//find a word based on search query
 app.get('/search', (req, res) => {
   // console.log('request', req.query);
   findWord(req.query.term)
@@ -40,6 +42,7 @@ app.get('/search', (req, res) => {
     })
 });
 
+//add or edit new word
 app.post('/changeList', (req, res) => {
   // console.log(req.body);
   addWord(req.body.word, req.body.definition)
@@ -54,7 +57,9 @@ app.post('/changeList', (req, res) => {
     })
 });
 
-app.post('/delete', (req, res) => {
+//delete word
+app.delete('/delete', (req, res) => {
+  // console.log('delete', req.body)
   deleteWord(req.body.deleteWord)
     .then(response => {
       res.status(201).send(response);

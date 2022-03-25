@@ -27,8 +27,16 @@ class AddForm extends React.Component {
       <div className='form'>
         <h3>Add a new word to the dictionary!</h3>
         <input onChange={(e) => this.onChangeWord(e)} placeholder='New Word' />
-        <input onChange={(e) => this.onChangeDefinition(e)} placeholder='Defintion' />
-        <button onClick={() => this.props.handleAdd(this.state.newWord, this.state.newDefinition)}>Add</button>
+        <input onChange={(e) => this.onChangeDefinition(e)} placeholder='Definition' />
+        <button onClick={() => {
+          if (this.state.newWord === '') {
+            alert('Please enter your word!');
+          } else if (this.state.newDefinition === '') {
+            alert('Please enter your definition!');
+          } else {
+            this.props.handleAdd(this.state.newWord, this.state.newDefinition);
+          }
+        }}>Add</button>
       </div>
     );
   }
