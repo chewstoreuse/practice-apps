@@ -17,34 +17,30 @@ class App extends React.Component {
     }
 
     this.onClickNext = this.onClickNext.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onClickNext(currPage) {
     var index = pages.indexOf(currPage);
+    console.log(currPage, index, pages[index + 1])
     this.setState({
-      currentPage: pages[index + 1] !== undefined ? pages[index + 1] : pages[0]
+      currentPage: pages[index + 1] || pages[0]
     });
 
     //not sure why this allows the form to connect
     event.preventDefault();
   }
 
-  onFormSubmit(route) {
-    console.log(route);
-  }
-
   render() {
     if (this.state.currentPage === 'HomePage') {
       return (<HomePage onClickNext={this.onClickNext} />);
     } else if (this.state.currentPage === 'CreateAccount') {
-      return (<CreateAccount onClickNext={this.onClickNext} onFormSubmit={this.onFormSubmit} />);
+      return (<CreateAccount onClickNext={this.onClickNext} />);
     } else if (this.state.currentPage === 'ShippingPage') {
-      return (<ShippingPage onClickNext={this.onClickNext} onFormSubmit={this.onFormSubmit} />);
+      return (<ShippingPage onClickNext={this.onClickNext} />);
     } else if (this.state.currentPage === 'BillingPage') {
-      return (<BillingPage onClickNext={this.onClickNext} onFormSubmit={this.onFormSubmit} />);
+      return (<BillingPage onClickNext={this.onClickNext} />);
     } else {
-      return (<ConfirmationPage onClickNext={this.onClickNext} onFormSubmit={this.onFormSubmit} />);
+      return (<ConfirmationPage onClickNext={this.onClickNext} />);
     }
   }
 }
